@@ -1,27 +1,19 @@
 #include"stdio.h"
-template<typename T>
-T add(T a, T b)
+int Recursive1(int kyyuryou, int zikan, int kotei)
 {
-	if (a <b) 
+	if (kyyuryou >= kotei)
 	{
-		return a;
+		printf("%dŠÔŒã‚É’´‚¦‚é", zikan);
+		return zikan;
 	}
-	if (a > b)
-	{
-		return b;
-	}
+	printf("%d\n%d\n", kyyuryou, kotei);
+	kyyuryou += kyyuryou * 2 - 50;
+	return(Recursive1(kyyuryou, ++zikan, kotei +1072));
 }
-template<>
-char add<char>(char a, char b)
+int main()
 {
-	
-}
-
-int main(void) 
-{
-	printf("%d\n", add<int>(114, 514));
-	printf("%f\n", add<float>(11.4f, 51.4f));
-	printf("%lf\n", add<double>(11.4444, 51.4444));
-	
-	
+	int saiki = 100;
+	int ippan = 1072;
+	int zikan = 1;
+	int result1 = Recursive1(saiki, zikan, ippan);
 }
