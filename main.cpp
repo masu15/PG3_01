@@ -1,27 +1,47 @@
 #include"stdio.h"
-template<typename T>
-T add(T a, T b)
-{
-	if (a <b) 
-	{
-		return a;
-	}
-	if (a > b)
-	{
-		return b;
-	}
-}
-template<>
-char add<char>(char a, char b)
-{
-	
-}
+#include"Windows.h"
+#include"time.h"
+typedef void(*PFunc)(int*, int*);
 
-int main(void) 
+void DispResult(int* s, int* kazu) {
+	int kekka = rand() % 2;
+	if (kekka == *kazu) {
+		if (kekka == 0)
+			printf("%dで丁(偶数）でした！大当たり！！\n", kekka);
+		else
+	        printf("%dで半(奇数）でした！大当たり！！\n", kekka);
+	} else
+	{
+			if (kekka == 0)
+				printf("%dで丁(偶数）でした！残念！！\n", kekka);
+			else
+				printf("%dで半(奇数）でした！残念！！\n", kekka);
+	}
+}
+void setTimeout(PFunc p, int second, int kazu) {
+	puts("さて結果は...\n");
+	for (int i = 0; i < second; i++) {
+		Sleep(second * 1000);
+		printf("% d...\n", second - i);
+	}
+	p(&second, &kazu);
+
+}
+int main() 
 {
-	printf("%d\n", add<int>(114, 514));
-	printf("%f\n", add<float>(11.4f, 51.4f));
-	printf("%lf\n", add<double>(11.4444, 51.4444));
-	
-	
+	int kazu;
+
+	srand(static_cast<unsigned int>(time(NULL)));
+
+	printf("丁（偶数）ならゼロ、半（奇数）なら1を入力してください\n");
+	scanf_s("%d", &kazu);
+	if (kazu == 0) {
+		puts("あなたは丁（偶数）を選びましたね？");
+	} else {
+		puts("あなたは半（奇数）を選びましたね？");
+	}
+	PFunc p;
+	p = DispResult;
+	setTimeout(p, 3, kazu);
+	return 0;
 }
